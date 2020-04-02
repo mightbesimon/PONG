@@ -1,3 +1,5 @@
+![screenshot](https://github.com/mightbesimon/PONG/blob/master/screenshot0.png)
+
 # PONG #
 particle effects!\
 \
