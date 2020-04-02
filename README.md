@@ -1,5 +1,6 @@
-# particle pong #
-
+# PONG #
+particle effects!\
+\
 [mostly finished]\
 way over-done pong game
 - objective oriented
@@ -25,16 +26,16 @@ $ pip3 install pygame
 and `python3` of course
 
 ### keybinds ###
-- [P] toggle pause
-- [C] toggle cheats
-- [F] toggle show FPS
-- [H] toggle show collision box
-- [T] toggle particles
-- [Q] quit
+- [P] = toggle pause
+- [C] = toggle cheats
+- [F] = toggle show FPS
+- [H] = toggle show collision box
+- [T] = toggle particles
+- [Q] = quit
 
 ## Authors ##
 
-- **simon** - *buy my merch* - [mightbesimon](https://github.com/mightbesimon)
+- **simon** - *<del>buy my merch</del> hire me pls* - [mightbesimon](https://github.com/mightbesimon)
 
 ## License ##
 
@@ -42,7 +43,9 @@ took me a very long time, please give credit
 
 ## Acknowledgments ##
 
-- next time I'd rather spend my weekend at BAR101 sinking cruisers than this crap
-- also missed lectures to do this
+- rather be clubbing next time
+- missed lectures to do this
 - also lectures are actually useless
+- lectures are now cancelled lmao
 - shoutout covid-19
+- clubs are now cancelled too fml
