@@ -1,31 +1,37 @@
-![screenshot](https://github.com/mightbesimon/PONG/blob/master/screenshot0.png)
+![screenshot](screenshot0.png)
 
 # PONG #
-particle effects!\
-\
-[mostly finished]\
-way over-done pong game
-- objective oriented
-- collision detect and hitboxes
-- particle effects
-- pause menu
+> particle effects!
 
+> minimalistic
 
-### demo ###
+> [mostly finished]
 
-unzip `PONG.app` on mac\
-\
-or
-```
-$ python3 run.py
-```
+PONG is a classic but *way* over-coded pong game
+- [x] minimalistic graphics
+- [x] objective oriented
+- [x] collision detection and hitboxes
+- [x] particle effects
+- [x] pause menu
 
-##### Prerequisites #####
+### Prerequisites ###
 
-```
+```bash
 $ pip3 install pygame
 ```
 and `python3` of course
+
+### demo ###
+
+download `PONG.app.zip`  
+unzip `PONG.app` on mac
+
+or
+```bash
+$ git clone https://github.com/mightbesimon/PONG.git
+$ cd PONG
+$ python3 run.py
+```
 
 ### keybinds ###
 - [P] = toggle pause
@@ -41,12 +47,13 @@ and `python3` of course
 
 ## License ##
 
-took me a very long time, please give credit
+took me a very long time, all rights reserved
 
 ## Acknowledgments ##
 
-- rather be clubbing next time
-- missed lectures to do this
+- Simon rather be clubbing next time
+- Simon missed lectures to do this
+- don't be like Simon
 - also lectures are actually useless
 - lectures are now cancelled lmao
 - shoutout covid-19
