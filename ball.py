@@ -2,6 +2,7 @@ import pygame as pg
 import math
 import palette
 from hitbox import *
+from bound  import *
 
 
 # define constants
@@ -28,14 +29,15 @@ class Ball:
 		self.speed     = BALL_SPEED
 		self.direction = 160
 
-		# hitbox
-		self.hitbox = Hitbox(self, self.width, self.height)
+		# hitbox & bound
+		self.hitbox = Hitbox(self, [self.width, self.height])
+		self.bound  = Bound (self, [350, 450], [280, 360])
 
 	def render(self, screen):
 		pg.draw.circle(screen, self.color, [int(self.x), int(self.y)], self.radius)
 		if self.hitbox.show: self.hitbox.render(screen)
 		if hasattr(self, 'trail'): self.trail.render(screen)
-		# if self.hasTrail: self.trail.render(direction=self.direction, spread=10, origin='point')
+		if self.bound.show: self.bound.render(screen)
 		
 
 
@@ -46,17 +48,17 @@ class Ball:
 		self.check_bounds()
 
 	def check_bounds(self):
-		if self.x <= 0:
-			x = 0
+		if self.bound.check_left():
+			self.x = self.bound._left
 			self.direction *= -1
-		if self.x >= 800:
-			x = 800
+		if self.bound.check_right():
+			self.x = self.bound._right
 			self.direction *= -1
-		if self.y <= 0:
-			y = 0
+		if self.bound.check_top():
+			self.y = self.bound._top
 			self.direction = 180 - self.direction
-		if self.y >= 640:
-			y = 640
+		if self.bound.check_bottom():
+			self.y = self.bound._bottom
 			self.direction = 180 - self.direction
 
 

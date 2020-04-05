@@ -1,6 +1,7 @@
 import pygame as pg
 import palette
 from hitbox import *
+from bound  import *
 
 
 # define constants
@@ -25,13 +26,15 @@ class Bar:
 		# properties
 		self.speed  = BAR_SPEED
 
-		# hitbox
-		self.hitbox = Hitbox(self, self.width, self.height)
+		# hitbox & bound
+		self.hitbox = Hitbox(self, [self.width, self.height])
+		self.bound  = Bound (self, [1, 799], [545, 555])
 
 	def render(self, screen):
 		x = self.x - self.width //2
 		y = self.y - self.height//2
 		pg.draw.rect(screen, self.color, [x, y, self.width, self.height])
+		if self.bound.show: self.bound.render(screen)
 		if self.hitbox.show: self.hitbox.render(screen)
 		if hasattr(self, 'trail'): self.trail.render(screen)
 
@@ -41,8 +44,6 @@ class Bar:
 		self.check_bounds()
 
 	def check_bounds(self):
-		left  = 0   + self.width//2 + 1
-		right = 800 - self.width//2 - 1
-		if self.x < left:  self.x = left
-		if self.x > right: self.x = right
+		if self.bound.check_left() : self.x = self.bound._left
+		if self.bound.check_right(): self.x = self.bound._right
 
