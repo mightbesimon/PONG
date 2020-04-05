@@ -23,10 +23,6 @@ and `python3` of course
 
 ### demo ###
 
-download `PONG.app.zip`  
-unzip `PONG.app` on mac
-
-or
 ```bash
 $ git clone https://github.com/mightbesimon/PONG.git
 $ cd PONG
@@ -38,6 +34,7 @@ $ python3 run.py
 - [C] = toggle cheats
 - [F] = toggle show FPS
 - [H] = toggle show collision box
+- [B] = toggle show bounds box
 - [T] = toggle particles
 - [Q] = quit
 
