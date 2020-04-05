@@ -14,7 +14,7 @@ PARTICLE_SPEED = 4
 PARTICLE_SIZE  = 4
 FADE_SPEED     = 0.95
 # trail
-NUM_PARTICLES  = 20
+PARTICLE_LIFE  = 20
 
 
 class Particle:
@@ -23,7 +23,7 @@ class Particle:
 	          size=PARTICLE_SIZE, shape='square', fade=FADE_SPEED, trail=None):
 		self.master = master
 		self.game   = game
-		self.hitbox = Hitbox(self, size, size)
+		self.hitbox = Hitbox(self, [size]*2)
 
 		# position
 		self.x = self.master.x
@@ -107,13 +107,14 @@ class Particle:
 
 class Trail:
 	'''a trail of particles'''
-	def __init__(self, master, game, density=1, spread=0, fade=FADE_SPEED,
+	def __init__(self, master, game, life=PARTICLE_LIFE, density=1, spread=0, fade=FADE_SPEED,
 					ptcl_speed=PARTICLE_SPEED, direction=0, origin='plank',
 					ptcl_size=PARTICLE_SIZE, ptcl_shape='square', style=None):
 		self.master = master
 		self.game   = game
 
 		# properties
+		self.life      = life
 		self.density   = density
 		self.spread    = spread
 		self.direction = direction
@@ -123,7 +124,7 @@ class Trail:
 
 		# variables
 		self.idx = 0
-		self.qty = NUM_PARTICLES * self.density
+		self.qty = self.life * self.density
 
 		# particle properties
 		self.fade_speed = FADE_SPEED
@@ -142,7 +143,7 @@ class Trail:
 
 	def update(self):
 		for ptcl in self.trail: ptcl.update()
-		self.qty = NUM_PARTICLES * self.density
+		self.qty = self.life * self.density
 		self.idx = (self.idx+self.density) % self.qty
 		for itr in range(self.density):
 			self.trail[(self.idx+itr) % self.qty] = self.place_ptcl()
@@ -154,10 +155,10 @@ class Trail:
 
 
 
-def make(master, game, density=1, spread=0, fade=FADE_SPEED,
+def make(master, game, life=PARTICLE_LIFE, density=1, spread=0, fade=FADE_SPEED,
 				ptcl_speed=PARTICLE_SPEED, direction=0, origin='plank',
 				ptcl_size=PARTICLE_SIZE, ptcl_shape='square', style=None):
-	master.trail = Trail(master, game, density, spread, fade,
+	master.trail = Trail(master, game, life, density, spread, fade,
 							ptcl_speed, direction, origin,
 							ptcl_size, ptcl_shape, style)
 
