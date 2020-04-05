@@ -49,7 +49,7 @@ class Game:
 
 		# info
 		self.showfps   = SHOW_FPS
-		self.debugging = None
+		self.debugging = False
 
 		# game objects
 		self.bar  = Bar(400, 550)
@@ -80,7 +80,9 @@ class Game:
 			if event.type == pg.QUIT: self.over = True
 
 			if self.menu == 'start_menu':
-				if event.type == pg.KEYDOWN:
+				if (event.type == pg.KEYUP
+						or event.type == pg.KEYDOWN
+						and(event.key==pg.K_LEFT or event.key==pg.K_RIGHT)):
 					self.menu = None
 					self.ball.release()
 				break
