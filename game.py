@@ -43,6 +43,7 @@ class Game:
 		self.over 	 = False
 		self.paused  = False
 		self.cheats  = False
+		self.menu    = 'start_menu'
 
 		self.score   = 0
 
@@ -76,14 +77,22 @@ class Game:
 
 	def getevent(self):
 		for event in pg.event.get():
+			if event.type == pg.QUIT: self.over = True
+
+			if self.menu == 'start_menu':
+				if event.type == pg.KEYDOWN:
+					self.menu = None
+					self.ball.release()
+				break
+
+
 			toggles.check(self.toggles, event)
 
-			if event.type == pg.QUIT:
-				self.over = True
 			if event.type == pg.KEYUP:
 				# Q to quit game
 				if event.key == pg.K_q:
 					self.over = True
+
 
 		# adjustments
 		keys = pg.key.get_pressed()
@@ -115,11 +124,18 @@ class Game:
 
 		self.score_info = self.scorefont.render(f'{self.score}', True, palette.SNOW)
 
+		self.start_menu = []
+		self.start_menu.append({'message' : make_message('PONG', palette.DARK, 80),
+								'position': [400, 240]})
+		self.start_menu.append({'message' : make_message('PRESS [any key] TO CONTINUE', palette.DARK),
+								'position': [400, 300]})
+
 		self.pause_menu = []
 		self.pause_menu.append({'message' : self.scorefont.render('PAUSED', True, palette.DARK),
-								'position': [400-112//2, 270]})
+								'position': [400, 270]})
 		self.pause_menu.append({'message' : self.infofont.render('PRESS [P] TO CONTINUE', True, palette.DARK),
 								'position': [400, 320]})
+		'''
 		self.pause_menu.append({'message' : self.infofont.render('[P] toggle pause', True, palette.SNOW),
 								'position': [309, 340]})
 		self.pause_menu.append({'message' : self.infofont.render('[C] toggle cheats', True, palette.SNOW),
@@ -130,6 +146,7 @@ class Game:
 								'position': [309, 385]})
 		self.pause_menu.append({'message' : self.infofont.render('[T] toggle show particles', True, palette.SNOW),
 								'position': [309, 400]})
+		'''
 
 	def render(self):
 		# clear screen
@@ -140,7 +157,12 @@ class Game:
 		self.ball.render(self.screen)
 
 		# score
-		self.screen.blit(self.score_info, [765-self.score_info.get_width(), 30])
+		if self.menu == None:
+			self.screen.blit(self.score_info, [765-self.score_info.get_width(), 30])
+
+		if self.menu == 'start_menu':
+			for item in self.start_menu:
+				self.screen.blit(item['message'], [400-item['message'].get_width()//2, item['position'][1]])
 
 		if self.paused:
 			for item in self.pause_menu[:2]:
@@ -153,5 +175,11 @@ class Game:
 		if self.debugging: self.screen.blit(self.debug_info, [50, 66])
 
 		pg.display.update()
+
+
+
+def make_message(message, color, size=20):
+	font = pg.font.Font(None, size)
+	return font.render(message, True, color)
 
 

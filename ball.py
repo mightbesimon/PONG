@@ -31,15 +31,14 @@ class Ball:
 
 		# hitbox & bound
 		self.hitbox = Hitbox(self, [self.width, self.height])
-		self.bound  = Bound (self, [350, 450], [280, 360])
+		self.bound  = Bound (self, [300, 500], [200, 360])
+		# self.bound.show = True
 
 	def render(self, screen):
 		pg.draw.circle(screen, self.color, [int(self.x), int(self.y)], self.radius)
 		if self.hitbox.show: self.hitbox.render(screen)
 		if hasattr(self, 'trail'): self.trail.render(screen)
 		if self.bound.show: self.bound.render(screen)
-		
-
 
 	def move(self):
 		theta = math.radians(self.direction)
@@ -61,4 +60,6 @@ class Ball:
 			self.y = self.bound._bottom
 			self.direction = 180 - self.direction
 
+	def release(self):
+		self.bound  = Bound (self, [0, 800], [0, 640])
 
