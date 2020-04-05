@@ -34,26 +34,24 @@ class Toggle:
 def make(master):
 	toggle = Toggle(master)
 
-	cheats     = Action(key=pg.K_c, function=toggle.cheats    )
-	paused     = Action(key=pg.K_p, function=toggle.paused    )
-	showfps    = Action(key=pg.K_f, function=toggle.showfps   )
-	showHitbox = Action(key=pg.K_h, function=toggle.showHitbox)
-	showBounds = Action(key=pg.K_b, function=toggle.showBounds)
-	particles  = Action(key=pg.K_t, function=toggle.particles )
+	return {
+		'cheats'    : Action(key=pg.K_c, function=toggle.cheats    ),
+		'paused'    : Action(key=pg.K_p, function=toggle.paused    ),
+		'showfps'   : Action(key=pg.K_f, function=toggle.showfps   ),
+		'showHitbox': Action(key=pg.K_h, function=toggle.showHitbox),
+		'showBounds': Action(key=pg.K_b, function=toggle.showBounds),
+		'particles' : Action(key=pg.K_t, function=toggle.particles ),
+	}
 
-
-	return [
-		cheats,
-		paused,
-		showfps,
-		showHitbox,
-		showBounds,
-		particles,
-	]
-
-def check(toggles, event):
+def check(toggles, event, check_list=None):
 	if event.type != pg.KEYDOWN: return
-	for action in toggles:
-		if event.key == action.key:
-			action.execute()
+
+	if check_list:
+		for action in check_list:
+			if event.key == toggles[action].key:
+				toggles[action].execute()
+	else:
+		for action in toggles:
+			if event.key == toggles[action].key:
+				toggles[action].execute()
 

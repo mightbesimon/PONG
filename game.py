@@ -80,7 +80,11 @@ class Game:
 			if event.type == pg.QUIT: self.over = True
 
 			if self.menu == 'start_menu':
+				# if toggles.check(self.toggles, event, check_list=['showBounds']):
 				if (event.type == pg.KEYUP
+						and event.key == self.toggles['showBounds'].key):
+					self.toggles['showBounds'].execute()
+				elif (event.type == pg.KEYUP
 						or event.type == pg.KEYDOWN
 						and(event.key==pg.K_LEFT or event.key==pg.K_RIGHT)):
 					self.menu = None
