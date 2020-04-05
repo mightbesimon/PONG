@@ -8,7 +8,6 @@ from hitbox import *
 
 # define constants
 RAINBOW_CYCLE_SPEED = 10
-SCREEN_COLOR  = palette.SOFT_RED
 # particles
 PARTICLE_SPEED = 4
 PARTICLE_SIZE  = 4
@@ -20,7 +19,7 @@ PARTICLE_LIFE  = 20
 class Particle:
 	'''a single particle'''
 	def __init__(self, master, game, speed=PARTICLE_SPEED, direction=0, origin='plank',
-	          size=PARTICLE_SIZE, shape='square', fade=FADE_SPEED, trail=None):
+	          size=PARTICLE_SIZE, shape='square', fade_speed=FADE_SPEED, trail=None):
 		self.master = master
 		self.game   = game
 		self.hitbox = Hitbox(self, [size]*2)
@@ -34,7 +33,7 @@ class Particle:
 		self.direction  = direction
 		self.direction += master.direction + 180 if hasattr(master, 'direction') else 0
 		self.bounce_spread = 70
-		self.fade_speed = fade
+		self.fade_speed = fade_speed
 
 		# appearance
 		self.color = self.master.color if hasattr(master, 'color') else palette.DARK
@@ -107,7 +106,7 @@ class Particle:
 
 class Trail:
 	'''a trail of particles'''
-	def __init__(self, master, game, life=PARTICLE_LIFE, density=1, spread=0, fade=FADE_SPEED,
+	def __init__(self, master, game, life=PARTICLE_LIFE, density=1, spread=0, fade_speed=FADE_SPEED,
 					ptcl_speed=PARTICLE_SPEED, direction=0, origin='plank',
 					ptcl_size=PARTICLE_SIZE, ptcl_shape='square', style=None):
 		self.master = master
@@ -118,7 +117,6 @@ class Trail:
 		self.density   = density
 		self.spread    = spread
 		self.direction = direction
-		self.fade      = fade
 		self.origin    = origin
 		self.style     = None
 
@@ -127,7 +125,7 @@ class Trail:
 		self.qty = self.life * self.density
 
 		# particle properties
-		self.fade_speed = FADE_SPEED
+		self.fade_speed = fade_speed
 		self.ptcl_speed = ptcl_speed
 		self.ptcl_size  = ptcl_size
 		self.ptcl_shape = ptcl_shape
@@ -136,7 +134,7 @@ class Trail:
 		self.trail = [self.place_ptcl()] * self.qty
 
 	def place_ptcl(self):
-		return Particle(self.master, self.game, speed=self.ptcl_speed, fade=self.fade,
+		return Particle(self.master, self.game, speed=self.ptcl_speed, fade_speed=self.fade_speed,
 				direction=random.randint(-self.spread, self.spread) + self.direction,
 				origin=self.origin, trail=self,
 				size=self.ptcl_size, shape=self.ptcl_shape)
@@ -155,10 +153,10 @@ class Trail:
 
 
 
-def make(master, game, life=PARTICLE_LIFE, density=1, spread=0, fade=FADE_SPEED,
+def make(master, game, life=PARTICLE_LIFE, density=1, spread=0, fade_speed=FADE_SPEED,
 				ptcl_speed=PARTICLE_SPEED, direction=0, origin='plank',
 				ptcl_size=PARTICLE_SIZE, ptcl_shape='square', style=None):
-	master.trail = Trail(master, game, life, density, spread, fade,
+	master.trail = Trail(master, game, life, density, spread, fade_speed,
 							ptcl_speed, direction, origin,
 							ptcl_size, ptcl_shape, style)
 

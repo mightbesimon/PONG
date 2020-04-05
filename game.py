@@ -55,7 +55,7 @@ class Game:
 		self.ball = Ball(400, 240)
 		trail.make(self.bar,  self, life=30, density=10, spread=30)
 		self.bar.trail.density = 4
-		trail.make(self.ball, self, density=2,  spread=10, fade=0.88,
+		trail.make(self.ball, self, density=2,  spread=10, fade_speed=0.88,
 		           ptcl_speed=4-self.ball.speed, origin='point')
 
 		# helper containers
