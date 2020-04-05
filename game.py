@@ -61,7 +61,6 @@ class Game:
 		# helper containers
 		self.toggles = toggles.make(self)
 
-
 	def tick(self):
 		self.getevent()
 		self.update() if not self.paused else None
@@ -85,7 +84,6 @@ class Game:
 				# Q to quit game
 				if event.key == pg.K_q:
 					self.over = True
-
 
 		# adjustments
 		keys = pg.key.get_pressed()
@@ -134,7 +132,7 @@ class Game:
 								'position': [309, 400]})
 
 	def render(self):
-		#===== render the frame =====#
+		# clear screen
 		self.screen.fill((self.screen_color))
 
 		# bar, ball
@@ -147,8 +145,8 @@ class Game:
 		if self.paused:
 			for item in self.pause_menu[:2]:
 				self.screen.blit(item['message'], [400-item['message'].get_width()//2, item['position'][1]])
-			for item in self.pause_menu[2:]:
-				self.screen.blit(item['message'], item['position'])
+			# for item in self.pause_menu[2:]:
+			# 	self.screen.blit(item['message'], item['position'])
 
 		# info
 		if self.showfps:   self.screen.blit(self.fps_info,   [50, 50])
