@@ -7,10 +7,10 @@ class Hitbox():
 	"""hitbox attribute of game objects"""
 	show = False
 
-	def __init__(self, master, width, height, color=GREEN):
+	def __init__(self, master, dimension, color=GREEN):
 		self.master = master
-		self.width  = width
-		self.height = height
+		self.width, self.height = dimension
+
 		self.color  = color
 
 	def render(self, screen):
