@@ -1,6 +1,7 @@
 import pygame as pg
 import particles as trail
 from hitbox import *
+from bound  import *
 
 
 class Action:
@@ -18,6 +19,7 @@ class Toggle:
 	def paused (self): self.game.paused  = not self.game.paused
 	def showfps(self): self.game.showfps = not self.game.showfps
 	def showHitbox(self):    Hitbox.show = not Hitbox.show
+	def showBounds(self):    Bound.show  = not Bound.show
 
 	def particles(self):
 		if hasattr(self.game.bar,  'trail'):
@@ -36,6 +38,7 @@ def make(master):
 	paused     = Action(key=pg.K_p, function=toggle.paused    )
 	showfps    = Action(key=pg.K_f, function=toggle.showfps   )
 	showHitbox = Action(key=pg.K_h, function=toggle.showHitbox)
+	showBounds = Action(key=pg.K_b, function=toggle.showBounds)
 	particles  = Action(key=pg.K_t, function=toggle.particles )
 
 
@@ -44,6 +47,7 @@ def make(master):
 		paused,
 		showfps,
 		showHitbox,
+		showBounds,
 		particles,
 	]
 

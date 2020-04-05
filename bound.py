@@ -5,7 +5,7 @@ ORANGE = [255, 172,  32]
 
 class Bound():
 	"""bound attribute of game objects"""
-	show = True
+	show = False
 
 	def __init__(self, master, horizontal, vertical, color=ORANGE):
 		self.master = master
